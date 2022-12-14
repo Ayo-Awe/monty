@@ -1,5 +1,6 @@
 #ifndef _MONTY_H_
 #define _MONTY_H_
+extern char buffer[1000];
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -11,9 +12,9 @@
  */
 typedef struct stack_s
 {
-        int n;
-        struct stack_s *prev;
-        struct stack_s *next;
+	int n;
+	struct stack_s *prev;
+	struct stack_s *next;
 } stack_t;
 
 /**
@@ -26,7 +27,24 @@ typedef struct stack_s
  */
 typedef struct instruction_s
 {
-        char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
+	char *opcode;
+	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
+/**
+ * struct operation - opcode and its argument
+ * @opcode: the opcode
+ * @arg: argument for opcode
+ *
+ * Description: opcode and its argument
+ */
+typedef struct operation_s
+{
+	char *opcode;
+	int arg;
+} operation_t;
+void handle_error(char *msg);
+void push_handler(stack_t **stack, unsigned int line_number);
+char *parse_opcode(char *line);
+void (*get_handler(char *opcode))(stack_t **stack, unsigned int line_number);
 #endif
