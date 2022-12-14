@@ -31,18 +31,6 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-/**
- * struct operation - opcode and its argument
- * @opcode: the opcode
- * @arg: argument for opcode
- *
- * Description: opcode and its argument
- */
-typedef struct operation_s
-{
-	char *opcode;
-	int arg;
-} operation_t;
 void handle_error(char *msg, stack_t **stack);
 void push_handler(stack_t **stack, unsigned int line_number);
 char *parse_opcode(char *line, stack_t **stack);
