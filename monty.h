@@ -43,8 +43,10 @@ typedef struct operation_s
 	char *opcode;
 	int arg;
 } operation_t;
-void handle_error(char *msg);
+void handle_error(char *msg, stack_t **stack);
 void push_handler(stack_t **stack, unsigned int line_number);
-char *parse_opcode(char *line);
+char *parse_opcode(char *line, stack_t **stack);
 void (*get_handler(char *opcode))(stack_t **stack, unsigned int line_number);
+void free_stack(stack_t **stack);
+void pall_handler(stack_t **stack, unsigned int line_number);
 #endif

@@ -3,7 +3,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-char *parse_opcode(char *line)
+/**
+ * parse_opcode - parses opcode and return char containg opcode
+ * @line: string pointer containing current executing line
+ * @stack: pointer to head of stack
+ *
+ * Return: string containg opcode or NULL
+*/
+char *parse_opcode(char *line, stack_t **stack)
 {
 	char *dup_line = NULL;
 	char *token = NULL;
@@ -14,7 +21,7 @@ char *parse_opcode(char *line)
 	dup_line = strdup(line);
 
 	if (!dup_line)
-		handle_error("Error: malloc failed");
+		handle_error("Error: malloc failed", stack);
 
 	/* Get rid of new line */
 	dup_line[strlen(dup_line) - 1] = ' ';
@@ -36,7 +43,7 @@ char *parse_opcode(char *line)
 
 	/* Malloc failure */
 	if (!token)
-		handle_error("Error: malloc failed");
+		handle_error("Error: malloc failed", stack);
 
 	return (token);
 }
