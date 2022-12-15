@@ -18,6 +18,7 @@ void (*get_handler(char *opcode))(stack_t **stack, unsigned int line_number)
 		{"pall", pall_handler},
 		{"pint", pint_handler},
 		{"pop", pop_handler},
+		{"swap", swap_handler},
 		{NULL, NULL}};
 
 	while (instructions[i].opcode)
