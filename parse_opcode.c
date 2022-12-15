@@ -26,11 +26,11 @@ char *parse_opcode(char *line, stack_t **stack)
 	/* Get opcode */
 	token = strtok(dup_line, " ");
 
-	/* No instruction on the line */
-	if (!token)
+	/* No instruction on the line or line comments */
+	if (!token || token[0] == '#')
 	{
 		free(dup_line);
-		return (token);
+		return (NULL);
 	}
 
 	/* Return a duplicate of token */

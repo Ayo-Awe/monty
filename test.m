@@ -1,7 +1,7 @@
-push 10
+  #   #push 10
 push 1
-add
-div
+push 3
+#
 pint
-div
+
 pall
