@@ -9,14 +9,11 @@
  * @stack: pointer to head of stack
  *
  * Return: string containg opcode or NULL
-*/
+ */
 char *parse_opcode(char *line, stack_t **stack)
 {
 	char *dup_line = NULL;
 	char *token = NULL;
-
-	if (!line)
-		exit(EXIT_FAILURE);
 
 	dup_line = strdup(line);
 

@@ -3,8 +3,10 @@
 #include <string.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <ctype.h>
 
 void add_node(stack_t **head, int element);
+int _isdigit(char *s_num);
 void handle_push_error(int line_number, stack_t **stack);
 
 /**
@@ -24,6 +26,9 @@ void push_handler(stack_t **stack, unsigned int line_number)
 	arg_s = strtok(NULL, " ");
 
 	if (!arg_s)
+		handle_push_error(line_number, stack);
+
+	if (_isdigit(arg_s) == -1)
 		handle_push_error(line_number, stack);
 
 	/* Parse arg to int */
@@ -91,4 +96,28 @@ void handle_push_error(int line_number, stack_t **stack)
 	free_stack(stack);
 	fprintf(stderr, "L%u: usage: push integer\n", line_number);
 	exit(EXIT_FAILURE);
+}
+
+/**
+ * _isdigit - checks if a string is made of only digits
+ * @s_num: string
+ *
+ * Return: 1 if digit or -1
+ */
+int _isdigit(char *s_num)
+{
+	int i = 0;
+
+	if (!s_num)
+		return (-1);
+
+	while (s_num[i])
+	{
+		if (isdigit(s_num[i]) == 0)
+			return (-1);
+
+		s_num++;
+	}
+
+	return (1);
 }

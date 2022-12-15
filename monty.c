@@ -49,6 +49,8 @@ int main(int argc, char *argv[])
 	/* Main interpreter execution loop */
 	while (fgets(buffer, 1000, source))
 	{
+		/* Get rid of new line */
+		buffer[strlen(buffer) - 1] = ' ';
 		code = parse_opcode(buffer, &head);
 
 		if (!code)
