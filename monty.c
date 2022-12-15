@@ -3,8 +3,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stddef.h>
+#include <unistd.h>
 
-char buffer[1000];
+global_t myglobals;
 
 void handle_instruction_error(int line_number, stack_t **stack, char *code);
 
@@ -18,10 +19,14 @@ void handle_instruction_error(int line_number, stack_t **stack, char *code);
 int main(int argc, char *argv[])
 {
 	FILE *source;
+	char *str;
+	char buffer[1000];
+	int length;
 	int current_line = 1;
-	void (*handler)(stack_t **stack, unsigned int line_number);
+	void (*handler)(stack_t * *stack, unsigned int line_number);
 	char *code;
 	stack_t *head = NULL;
+	myglobals.buffer = buffer;
 
 	if (argc != 2)
 		handle_error("USAGE: monty file", &head);
@@ -33,6 +38,13 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Error: Can't open file %s\n", argv[0]);
 		exit(EXIT_FAILURE);
 	}
+	myglobals.file = source;
+
+	length = snprintf(NULL, 0, "%d", fileno(source));
+	str = malloc(length + 1);
+	snprintf(str, length + 1, "%d", fileno(source));
+	setenv("monty_fd", str, 1);
+	free(str);
 
 	/* Main interpreter execution loop */
 	while (fgets(buffer, 1000, source))
@@ -69,7 +81,9 @@ int main(int argc, char *argv[])
  */
 void handle_instruction_error(int line_number, stack_t **stack, char *code)
 {
+	fclose(myglobals.file);
 	free_stack(stack);
 	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, code);
+	free(code);
 	exit(EXIT_FAILURE);
 }

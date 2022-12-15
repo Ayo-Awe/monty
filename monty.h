@@ -1,6 +1,6 @@
 #ifndef _MONTY_H_
 #define _MONTY_H_
-extern char buffer[1000];
+#include <stdio.h>
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -31,6 +31,20 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/**
+ * struct global_s - opcode and its argument
+ * @buffer: buffer
+ * @file: argument for opcode
+ *
+ * Description: opcode and its argument
+ */
+typedef struct global_s
+{
+	char *buffer;
+	FILE *file;
+} global_t;
+
+extern global_t myglobals;
 void handle_error(char *msg, stack_t **stack);
 void push_handler(stack_t **stack, unsigned int line_number);
 char *parse_opcode(char *line, stack_t **stack);

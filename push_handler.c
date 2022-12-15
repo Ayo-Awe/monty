@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <unistd.h>
 
 void add_node(stack_t **head, int element);
 void handle_push_error(int line_number, stack_t **stack);
@@ -19,7 +20,7 @@ void push_handler(stack_t **stack, unsigned int line_number)
 	int arg = 0;
 
 	/* Get arg from buffer */
-	strtok(buffer, " ");
+	strtok(myglobals.buffer, " ");
 	arg_s = strtok(NULL, " ");
 
 	if (!arg_s)
@@ -86,6 +87,7 @@ void add_node(stack_t **head, int element)
  */
 void handle_push_error(int line_number, stack_t **stack)
 {
+	fclose(myglobals.file);
 	free_stack(stack);
 	fprintf(stderr, "L%u: usage: push integer\n", line_number);
 	exit(EXIT_FAILURE);
