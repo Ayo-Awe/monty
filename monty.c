@@ -28,7 +28,6 @@ int main(int argc, char *argv[])
 	stack_t *head = NULL;
 	myglobals.buffer = buffer;
 
-	printf("%d\n", argc);
 	if (argc != 2)
 		handle_error("USAGE: monty file", &head);
 
