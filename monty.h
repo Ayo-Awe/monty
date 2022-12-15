@@ -52,6 +52,7 @@ void (*get_handler(char *opcode))(stack_t **stack, unsigned int line_number);
 void free_stack(stack_t **stack);
 void pall_handler(stack_t **stack, unsigned int line_number);
 void pint_handler(stack_t **stack, unsigned int line_number);
+void nop_handler(stack_t **stack, unsigned int line_number);
 void pop_handler(stack_t **stack, unsigned int line_number);
 void swap_handler(stack_t **stack, unsigned int line_number);
 void add_handler(stack_t **stack, unsigned int line_number);
