@@ -23,11 +23,11 @@ int main(int argc, char *argv[])
 	char buffer[1000];
 	int length;
 	int current_line = 1;
-	void (*handler)(stack_t * *stack, unsigned int line_number);
+	void (*handler)(stack_t **stack, unsigned int line_number);
 	char *code;
 	stack_t *head = NULL;
-	myglobals.buffer = buffer;
 
+	myglobals.buffer = buffer;
 	if (argc != 2)
 		handle_error("USAGE: monty file", &head);
 
