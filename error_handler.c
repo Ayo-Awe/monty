@@ -15,8 +15,11 @@ void handle_error(char *msg, stack_t **stack)
 	if (!msg)
 		msg = "Error";
 
-	fclose(myglobals.file);
-	free(stack);
+	free_stack(stack);
+
+	if (myglobals.file)
+		fclose(myglobals.file);
+
 	fprintf(stderr, "%s\n", msg);
 	exit(EXIT_FAILURE);
 }
