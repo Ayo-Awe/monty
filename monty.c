@@ -59,10 +59,10 @@ int main(int argc, char *argv[])
 		if (!handler)
 			handle_instruction_error(current_line, &head, code);
 
+		free(code);
 		handler(&head, current_line);
 
 		current_line++;
-		free(code);
 	}
 
 	free_stack(&head);
