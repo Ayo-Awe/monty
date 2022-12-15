@@ -54,4 +54,5 @@ void pall_handler(stack_t **stack, unsigned int line_number);
 void pint_handler(stack_t **stack, unsigned int line_number);
 void pop_handler(stack_t **stack, unsigned int line_number);
 void swap_handler(stack_t **stack, unsigned int line_number);
+void add_handler(stack_t **stack, unsigned int line_number);
 #endif
