@@ -19,9 +19,7 @@ void handle_instruction_error(int line_number, stack_t **stack, char *code);
 int main(int argc, char *argv[])
 {
 	FILE *source;
-	char *str;
 	char buffer[1000];
-	int length;
 	int current_line = 1;
 	void (*handler)(stack_t **stack, unsigned int line_number);
 	char *code;
@@ -40,12 +38,6 @@ int main(int argc, char *argv[])
 	}
 	myglobals.file = source;
 
-	length = snprintf(NULL, 0, "%d", fileno(source));
-	str = malloc(length + 1);
-	snprintf(str, length + 1, "%d", fileno(source));
-	setenv("monty_fd", str, 1);
-	free(str);
-
 	/* Main interpreter execution loop */
 	while (fgets(buffer, 1000, source))
 	{
@@ -54,7 +46,10 @@ int main(int argc, char *argv[])
 		code = parse_opcode(buffer, &head);
 
 		if (!code)
+		{
+			current_line++;
 			continue;
+		}
 
 		handler = get_handler(code);
 

@@ -13,5 +13,4 @@
 void nop_handler(stack_t **stack __attribute__((unused)),
 				 unsigned int line_number __attribute__((unused)))
 {
-	return;
 }
