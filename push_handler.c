@@ -28,6 +28,9 @@ void push_handler(stack_t **stack, unsigned int line_number)
 	if (!arg_s)
 		handle_push_error(line_number, stack);
 
+	if (_isdigit(arg_s) == -1)
+		handle_push_error(line_number, stack);
+
 	/* Parse arg to int */
 	arg = atoi(arg_s);
 
@@ -107,10 +110,6 @@ int _isdigit(char *s_num)
 
 	if (!s_num)
 		return (-1);
-
-	/* Ignore negative symbol */
-	if (*s_num == '-')
-		s_num++;
 
 	while (s_num[i])
 	{
