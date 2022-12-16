@@ -111,6 +111,10 @@ int _isdigit(char *s_num)
 	if (!s_num)
 		return (-1);
 
+	/* Ignore negative symbol */
+	if (*s_num == '-')
+		s_num++;
+
 	while (s_num[i])
 	{
 		if (isdigit(s_num[i]) == 0)
