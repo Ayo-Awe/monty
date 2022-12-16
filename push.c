@@ -6,6 +6,7 @@
 #include <ctype.h>
 
 void add_node(stack_t **head, int element);
+void add_node_end(stack_t **head, int element);
 int _isdigit(char *s_num);
 void handle_push_error(int line_number, stack_t **stack);
 
@@ -38,7 +39,13 @@ void push_handler(stack_t **stack, unsigned int line_number)
 	if (arg_s[0] != '0' && arg == 0)
 		handle_push_error(line_number, stack);
 
-	add_node(stack, arg);
+	/* Add node based on the current mode */
+	if (myglobals.mode == 0)
+		/* Mode is stack */
+		add_node(stack, arg);
+	else
+		/* Mode is queue */
+		add_node_end(stack, arg);
 }
 
 /**
@@ -81,6 +88,48 @@ void add_node(stack_t **head, int element)
 	/* Make new node head */
 	new->next = current;
 	current->prev = new;
+}
+
+/**
+ * add_node_end - adds a node to the end of the stack
+ * @head: head of the stack
+ * @element: element to add to stack
+ *
+ * Return: void
+ */
+void add_node_end(stack_t **head, int element)
+{
+	stack_t *current;
+	stack_t *new;
+
+	if (!head)
+		return;
+
+	new = malloc(sizeof(stack_t));
+
+	if (!new)
+		handle_error("Error: malloc failed", head);
+
+	new->n = element;
+	new->prev = NULL;
+	new->next = NULL;
+
+	/* Stack is empty */
+	if (*head == NULL)
+	{
+		*head = new;
+		return;
+	}
+
+	current = *head;
+
+	/* Navigate to end of stack */
+	while (current->next)
+		current = current->next;
+
+	/* set new node as last node */
+	current->next = new;
+	new->prev = current;
 }
 
 /**

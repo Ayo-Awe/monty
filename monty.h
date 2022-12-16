@@ -42,6 +42,8 @@ typedef struct global_s
 {
 	char *buffer;
 	FILE *file;
+	/* 0 is stack and 1 is queue. Default is stack */
+	int mode;
 } global_t;
 
 extern global_t myglobals;
@@ -64,4 +66,6 @@ void mod_handler(stack_t **stack, unsigned int line_number);
 void pstr_handler(stack_t **stack, unsigned int line_number);
 void rotl_handler(stack_t **stack, unsigned int line_number);
 void rotr_handler(stack_t **stack, unsigned int line_number);
+void queue_handler(stack_t **stack, unsigned int line_number);
+void stack_handler(stack_t **stack, unsigned int line_number);
 #endif

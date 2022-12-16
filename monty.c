@@ -26,6 +26,8 @@ int main(int argc, char *argv[])
 	stack_t *head = NULL;
 
 	myglobals.buffer = buffer;
+	myglobals.mode = 0;
+
 	if (argc != 2)
 		handle_error("USAGE: monty file", &head);
 
