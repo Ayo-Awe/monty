@@ -27,6 +27,7 @@ void (*get_handler(char *opcode))(stack_t **stack, unsigned int line_number)
 		{"mod", mod_handler},
 		{"pchar", pchar_handler},
 		{"pstr", pstr_handler},
+		{"rotl", rotl_handler},
 		{NULL, NULL}};
 
 	while (instructions[i].opcode)
